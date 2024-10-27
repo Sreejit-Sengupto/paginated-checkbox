@@ -10,7 +10,11 @@ const VerificationPrompt = () => {
     try {
       setBtnDisabled(true); // disable the button
       alert("Mail sent");
-      await account.createVerification("http://localhost:5173/verify-email");
+      const url = import.meta.env.PROD
+        ? "https://paginated-checkbox.vercel.app/verify-email"
+        : "http://localhost:5173/verify-email";
+
+      await account.createVerification(url);
     } catch (error) {
       console.error(error);
     }
